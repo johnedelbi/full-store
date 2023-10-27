@@ -6,7 +6,8 @@ import verifyToken from '../middleware/verifyToken.js';
 const productRoutes = express.Router();
 
 productRoutes.get('/', productControllers.getProducts);
-productRoutes.get('/cat/:category', productControllers.getProductByCategory);
+productRoutes.get('/:id', productControllers.getProductById);
+productRoutes.get('/cat/:category', productControllers.getProductsByCategory);
 productRoutes.post('/', verifyToken, productControllers.addProducts);
 productRoutes.put('/:id', verifyToken, productControllers.updateProducts);
 productRoutes.delete('/:id', verifyToken, productControllers.deleteProducts);

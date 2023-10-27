@@ -27,6 +27,25 @@ class Product {
         return products.find((product) => product.id === id);
     };
 
+    static updateProductById = (id, updateProduct) => {
+        const index = products.findIndex((product) => product.id === id);
+        if (index === -1) {
+            return false;
+        } else {
+            products[index] = { id, ...updateProduct };
+            return true;
+        }
+    };
+    static deleteProductById = (id) => {
+        const index = products.findIndex((product) => product.id === id);
+        if (index === -1) {
+            return false;
+        } else {
+            products.splice(index, 1);
+            return true;
+        }
+    };
+
     static getProductByCategory = (category) => {
         return products.filter((product) => product.category === category);
     };
