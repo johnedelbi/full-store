@@ -25,15 +25,20 @@ const userControllers = {
                 const newUser = new User(email, hashedPassword);
                 newUser.addUser();
                 res.status(201).json({
+                    Register: true,
                     message: `A user with email ${email} ${hashedPassword} ${email}has created successful`
                 });
             } else {
                 res.status(400).json({
+                    Register: false,
                     message: 'Email or Password is not valid'
                 });
             }
         } else {
-            res.status(409).json({ message: 'user Email already exist' });
+            res.status(409).json({
+                Register: false,
+                message: 'user Email already exist'
+            });
         }
     },
     userLogin: (req, res) => {
@@ -53,19 +58,31 @@ const userControllers = {
                         res.cookie('userId', emailExist.id);
                         res.cookie('token', token, { httpOnly: true });
                         res.status(200).json({
+                            login: true,
                             token: token,
                             id: emailExist.id
                         });
                     } else {
                         res.status(409).json({
+                            login: false,
                             message: 'Email or Password is not valid'
                         });
                     }
                 }
             );
         } else {
-            res.status(409).json({ message: 'Email is not exist' });
+            res.status(409).json({
+                login: false,
+                message: 'Email is not exist'
+            });
         }
+    },
+    logOut: (req, res) => {
+        res.clearCookie('id');
+        res.clearCookie('token');
+        resizeTo
+            .status(200)
+            .json({ logout: true, message: 'user is logged out successfully' });
     }
 };
 
