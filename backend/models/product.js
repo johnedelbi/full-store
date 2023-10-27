@@ -23,6 +23,10 @@ class Product {
         return products;
     };
 
+    static getProductByID = (id) => {
+        return products.find((product) => product.id === id);
+    };
+
     static getProductByCategory = (category) => {
         return products.filter((product) => product.category === category);
     };
